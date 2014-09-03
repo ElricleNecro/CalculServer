@@ -20,7 +20,7 @@ class EventHandler(pi.ProcessEvent):
     def process_IN_CLOSE_WRITE(self, event):
         print("End Writing:", event.pathname)
         print("scp %s %s:%s" % (
-                self._cs_event.pathname,
+                event.pathname,
                 self._cs_host,
                 self._cs_path,
             )
