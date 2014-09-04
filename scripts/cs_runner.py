@@ -46,12 +46,14 @@ class EventHandler(pi.ProcessEvent):
             )
 
         # print(
-        os.system(
+        ret = os.system(
             "RENDER_CONFIG=%s blender -b --python %s" % (
                 self._cs_cfg,
                 self._cs_script,
             )
         )
+        if ret == 0:
+            os.remove(event.pathname)
 
 
 
