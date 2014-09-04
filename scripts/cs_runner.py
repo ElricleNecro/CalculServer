@@ -45,8 +45,8 @@ class EventHandler(pi.ProcessEvent):
                 )
             )
 
-        # os.system
-        print(
+        # print(
+        os.system(
             "RENDER_CONFIG=%s blender -b --python %s" % (
                 self._cs_cfg,
                 self._cs_script,
