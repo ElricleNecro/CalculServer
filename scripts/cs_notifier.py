@@ -18,13 +18,16 @@ class EventHandler(pi.ProcessEvent):
         super(EventHandler, self).__init__(*args, **kwargs)
 
     def process_IN_CLOSE_WRITE(self, event):
-        os.system(
+        ret = os.system(
             "scp %s %s:%s" % (
                 event.pathname,
                 self._cs_host,
                 self._cs_path,
             )
         )
+        if ret == 0:
+            os.remove(event.pathname)
+
         # print("End Writing:", event.pathname)
         # print("scp %s %s:%s" % (
                 # event.pathname,
