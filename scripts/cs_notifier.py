@@ -18,7 +18,9 @@ class EventHandler(pi.ProcessEvent):
         super(EventHandler, self).__init__(*args, **kwargs)
 
     def process_IN_CLOSE_WRITE(self, event):
+        print("Receiving %s event." % event.pathname)
         if "None" in event.pathname:
+            print("Treating it.")
             ret = os.system(
                 "scp %s %s:%s" % (
                     event.pathname,
