@@ -18,13 +18,20 @@ class EventHandler(pi.ProcessEvent):
         super(EventHandler, self).__init__(*args, **kwargs)
 
     def process_IN_CLOSE_WRITE(self, event):
-        print("End Writing:", event.pathname)
-        print("scp %s %s:%s" % (
+        os.system(
+            "scp %s %s:%s" % (
                 event.pathname,
                 self._cs_host,
                 self._cs_path,
             )
         )
+        # print("End Writing:", event.pathname)
+        # print("scp %s %s:%s" % (
+                # event.pathname,
+                # self._cs_host,
+                # self._cs_path,
+            # )
+        # )
 
 
 def arguments():
@@ -32,10 +39,17 @@ def arguments():
     parser.add_argument(
         "--host-path",
         default="/UMA/tmp/",
+        type=str,
     )
     parser.add_argument(
         "--host",
         default="medoc",
+        type=str,
+    )
+    parser.add_argument(
+        "Watch",
+        type=str,
+        help="Watched directory.",
     )
 
     return parser.parse_args()
@@ -53,6 +67,6 @@ if __name__ == '__main__':
     )
 
     notifier = pi.Notifier(wm, handler)
-    wdd = wm.add_watch("/tmp/test", mask, rec=True)
+    wdd = wm.add_watch(args.Watch, mask, rec=True)
 
     notifier.loop()
