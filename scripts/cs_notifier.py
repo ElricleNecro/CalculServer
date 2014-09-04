@@ -28,6 +28,7 @@ class EventHandler(pi.ProcessEvent):
             )
             if ret == 0:
                 os.remove(event.pathname)
+            print("Waiting for another event.")
 
         # print("End Writing:", event.pathname)
         # print("scp %s %s:%s" % (
