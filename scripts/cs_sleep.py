@@ -12,14 +12,16 @@ from time import sleep
 def arguments():
     parser = ap.ArgumentParser()
     parser.add_argument(
-        "--host-path",
-        default="/UMA/tmp/",
+        "--script",
+        default="script.sh",
         type=str,
+        help="Script to execute."
     )
     parser.add_argument(
-        "--host",
-        default="medoc",
+        "--motif",
+        default="None_*",
         type=str,
+        help="Searched file are given by this motif."
     )
     parser.add_argument(
         "Watch",
@@ -34,14 +36,10 @@ if __name__ == '__main__':
     args = arguments()
 
     while True:
-        lst = sorted(glob(path.join(args.Watch, "None_*")))
+        lst = sorted(glob(path.join(args.Watch, args.motif)))
         for f in lst:
             ret = os.system(
-                "scp %s %s:%s" % (
-                    f,
-                    args.host,
-                    args.host_path,
-                )
+                args.script + " " + f
             )
             if ret == 0:
                 os.remove(f)
