@@ -41,8 +41,6 @@ if __name__ == '__main__':
             ret = os.system(
                 args.script + " " + f
             )
-            if ret == 0:
-                os.remove(f)
         lst = []
         sleep(60)
 
