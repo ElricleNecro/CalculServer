@@ -60,7 +60,7 @@ class EventHandler(pi.ProcessEvent):
         self._cs_q = Queue()
         for i in range(nb_proc):
             t = Thread(
-                target = Cmd(),
+                target = Cmd,
                 args=[self._cs_q, CreateLog(i, loglvl)],
             )
             t.start()
