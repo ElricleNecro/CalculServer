@@ -29,6 +29,7 @@ setup(
 	scripts = [
 		'scripts/cs_notifier.py',
 		'scripts/cs_runner.py',
+		'scripts/cs_sleep.py',
 	],
 )
 
